@@ -90,27 +90,31 @@
                                                      actual-note final-display)
                                                    result)))))))
 
-                         (setf i (+ close-pos 2)))
+                        (setf i (+ close-pos 2)))
 
-                        (progn
-                         (write-char #\[ result)
-                         (incf i 1)))))
+                      (progn
+                       (write-char #\[ result)
+                       (incf i 1)))))
 
+              ((image-link-p line i len)
+                (multiple-value-bind (is-img filename alt-text next-pos)
+                    (image-link-p line i len)
+                  (declare (ignore is-img))
 
-                ((image-link-p line i len)
-                 (multiple-value-bind (is-img filename alt-text next-pos)
-                     (image-link-p line i len)
-                   (declare (ignore is-img))
+                  (format result "<img src=\"~A\" alt=\"~A\" title=\"~A\" />"
+                    filename
+                    (if (string= alt-text "") filename alt-text)
+                    alt-text)
 
-                   (format result "<img src=\"~A\" alt=\"~A\" title=\"~A\" />"
-                     filename
-                     (if (string= alt-text "") filename alt-text)
-                     alt-text)
+                  (setf i next-pos)))
+              ((link-p-external line i len)
+                (multiple-value-bind (is-link next-pos text url)
+                    (link-p-external line i len)
+                  (declare (ignore is-link))
+                  (write-string (format nil "<a href=\"~A\">~A</a>" url (inline-walker text)) result)
+                  (setf i next-pos)))
+              (t
+                (write-char (char line i) result)
+                (incf i 1))))
 
-                   (setf i next-pos)))
-                   
-                (t
-                 (write-char (char line i) result)
-                 (incf i 1))))
-
-            (get-output-stream-string result)))
+    (get-output-stream-string result)))

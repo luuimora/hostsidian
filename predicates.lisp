@@ -86,9 +86,9 @@
   "Another smartie. Checkes whether a string is a local link like [[#Header]].
    Returns T and text of header (for free, only today!)."
   (let ((len (length str)))
-    (when (and (>= len 5) 
-               (string= str "[[" :end1 2) 
-               (string= str "]]" :start1 (- len 2)) 
+    (when (and (>= len 5)
+               (string= str "[[" :end1 2)
+               (string= str "]]" :start1 (- len 2))
                (char= (char str 2) #\#))
           (values t (subseq str 3 (- len 2))))))
 
@@ -96,10 +96,10 @@
   "Checks whether a string is absolute markdowm link like [[Note]] или [[Note#Ankor]].
    Returns T, name of a note (as second value) and header to be ankored (third value, may be NIL if not extracted from given string)."
   (let ((len (length str)))
-    (when (and (>= len 5) 
-               (string= "[[" str :end2 2) 
-               (string= "]]" str :start2 (- len 2)) 
-               (not (char= (char str 2) #\#))) 
+    (when (and (>= len 5)
+               (string= "[[" str :end2 2)
+               (string= "]]" str :start2 (- len 2))
+               (not (char= (char str 2) #\#)))
           (let ((hash-pos (position #\# str :start 2 :end (- len 2))))
             (if hash-pos
                 (let ((note (subseq str 2 hash-pos))
@@ -171,3 +171,18 @@
                                      (string-trim '(#\Space #\Tab) (subseq content (1+ pipe-pos)))
                                      "")))
                   (values t filename alt-text (+ close-pos 2)))))))
+
+(defun link-p-external (line i len)
+  "Checks, if current position is start of external link [Text](URL).
+   Returns (values T next-index text url) or NIL."
+  (when (and (< i len) (char= (char line i) #\[))
+        (let ((close-bracket (position #\] line :start (1+ i))))
+          (when (and close-bracket
+                     (< (1+ close-bracket) len)
+                     (char= (char line (1+ close-bracket)) #\())
+                (let ((close-paren (position #\) line :start (+ 2 close-bracket))))
+                  (when close-paren
+                        (values t
+                          (1+ close-paren)
+                          (subseq line (1+ i) close-bracket)
+                          (subseq line (+ 2 close-bracket) close-paren))))))))
