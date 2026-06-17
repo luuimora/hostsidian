@@ -1,4 +1,9 @@
 Hey. Half vibe-coded, half have written myself. This is a CLI-utility to convert your Obsdidian vault to a bunch of static html files.
+WARNING:
+- I'm not claiming compatability with any Markdown standart
+- My goal is first of all make a utility I use myself for my own vault
+- Development is still going on, though it may suddenly be finished (when my vaulted will be converted to HTML properly)
+- I'm open to code review and contribution
 
 To compile, download the code and run:
 ```sh
@@ -32,3 +37,14 @@ done
 It'll work if you put all your files into one directory (also the pics).
 
 If you somehow found this helpful, enjoy.
+
+Project structure:
+
+1. predicates.lisp contains predicates used in project
+2. inline-walker.lisp contains a huge walker function that converts elements that are not blocks
+3. block-walker.lisp contains a huge walker function that converts elements that are blocks into AST
+4. renderer-ast.lisp contains a huge walker function that converts AST into HTML
+5. functions.lisp contains functions that are hanging in the air (mostly block proccessing stuff)
+6. main.lisp contains a main function
+7. package.lisp declares a package :websidian
+8. websidian.asd contains an asdf system definition
