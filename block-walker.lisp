@@ -38,7 +38,7 @@
                ((hr-p current-line)
                  (push (make-ast-node :type :hr :content nil) ast)
                  (setf lines (rest lines)))
-                 
+
                ((raw-html-p current-line)
                  (push (make-ast-node :type :raw-html :content current-line) ast)
                  (setf lines (rest lines)))
@@ -69,11 +69,16 @@
                                         :children (nreverse li-nodes))
                          ast)
                    (setf lines (nthcdr consumed lines))))
-               ((starts-with-p current-line "> ")
-                 (push (make-ast-node :type :blockquote
-                                      :children (block-walker (list (subseq current-line 2))))
-                       ast)
-                 (setf lines (rest lines)))
+
+               ((starts-with-p current-line ">")
+                 (let* ((has-space (and (> (length current-line) 1)
+                                        (char= (char current-line 1) #\Space)))
+                        (prefix-len (if has-space 2 1))
+                        (content (subseq current-line prefix-len)))
+                   (push (make-ast-node :type :blockquote
+                                        :children (block-walker (list content)))
+                         ast)
+                   (setf lines (rest lines))))
 
                (t
                  (push (make-ast-node :type :paragraph
