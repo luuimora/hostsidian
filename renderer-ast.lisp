@@ -45,7 +45,7 @@
          (format nil "<pre><code>~A</code></pre>" (ast-node-content node))))
 
      ((eq (ast-node-type node) :ul)
-      (if (null (ast-node-content node))
+      (if (null (ast-node-children node))
       (progn (format *error-output* "Got a NIL error. Report to Issues on Github, please~%") "")
       (format nil "<ul>~%~{~A~^~%~}~%</ul>"
         (mapcar #'render-ast-to-html (ast-node-children node)))))
