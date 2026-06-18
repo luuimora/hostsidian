@@ -15,14 +15,14 @@ Hey. Half vibe-coded, half have written myself. This is a CLI-utility to convert
 To compile, download the code and run:
 ```sh
 sbcl (or your implementation)
-(asdf:make :websidian)
+(asdf:make :hostsidian)
 ```
 
 You have to get the Deploy library into your local-projects of [Quicklisp](https://www.quicklisp.org/beta/) and install some dependecies before compilation (i think it's patchelf on Linux and libwinpthread-1.dll on Windows. Deploy will tell you what to install).
 
 To use it, open your shell and run:
 ```
-./websidian "name-of-note.md" "THE-SAME-NAME-AS-NOTE.html" "style.css" 
+./hostsidian "name-of-note.md" "THE-SAME-NAME-AS-NOTE.html" "style.css" 
 ```
 
 Last one is optional, the utility bakes css into html. I personally recommend [Sakura CSS](https://github.com/oxalorg/sakura).
@@ -37,7 +37,7 @@ find . -maxdepth 1 -name "*.md" -print0 | while read -d $'\0' file; do
     output_file="${clean_file%.md}.html"
     
     echo "Processing: $clean_file -> $output_file"
-    ./websidian "$clean_file" "$output_file" "style.css"
+    ./hostsidian "$clean_file" "$output_file" "style.css"
 done
 ```
 
@@ -56,4 +56,4 @@ If you somehow found this helpful, enjoy.
 5. _functions.lisp_ contains functions that are hanging in the air (mostly block proccessing stuff)
 6. _main.lisp_ contains a main function
 7. _package.lisp_ declares a package :websidian
-8. _websidian.asd_ contains an asdf system definition
+8. _hostsidian.asd_ contains an asdf system definition
