@@ -18,10 +18,6 @@
 (in-package :websidian)
 (defun render-ast-to-html (node)
   (cond
-   ((or (null node) (null (ast-node-content node)) (equal (ast-node-content node) "NIL"))
-     (format *error-output* "Got a NIL error in render, please, send your .md to issues in project's GitHub repo")
-     (format nil ""))
-
    ((eq (ast-node-type node) :blockquote)
      (format nil "<blockquote>~%~{~A~%~}</blockquote>"
        (mapcar #'render-ast-to-html (ast-node-children node))))
@@ -38,14 +34,14 @@
          (ast-node-level node))))
 
    ((eq (ast-node-type node) :code)
-     (format nil "  <pre><code>~A</pre></code>" (ast-node-content node)))
+    (format nil "  <pre><code>~A</pre></code>" (ast-node-content node)))
 
    ((eq (ast-node-type node) :ul)
      (format nil "<ul>~%~{~A~^~%~}~%</ul>"
        (mapcar #'render-ast-to-html (ast-node-children node))))
    ((eq (ast-node-type node) :hr)
      (format nil "<hr />~%"))
-
+     
    ((eq (ast-node-type node) :li)
      (let ((parsed-inline-text (inline-walker (ast-node-content node))))
        (format nil "  <li>~A</li>" parsed-inline-text)))
