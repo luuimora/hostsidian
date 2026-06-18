@@ -1,5 +1,5 @@
 ;;
-;; Websidian. Converts .md to .html
+;; Hostsidian. Converts .md to .html
 ;; Copyright (C) 2026  Artyom Gorlov
 ;;
 ;; This program is free software: you can redistribute it and/or modify
@@ -17,7 +17,7 @@
 ;;
 
 
-(in-package :websidian)
+(in-package :hostsidian)
 (defstruct ast-node
   type
   content

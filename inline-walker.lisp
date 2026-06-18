@@ -1,5 +1,5 @@
 ;;
-;; Websidian. Converts .md to .html
+;; Hostsidian. Converts .md to .html
 ;; Copyright (C) 2026  Artyom Gorlov
 ;;
 ;; This program is free software: you can redistribute it and/or modify
@@ -15,7 +15,7 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
-(in-package :websidian)
+(in-package :hostsidian)
 (defun inline-walker (line) "Uses the LOOP macro to scan a line and identify Markdown inline syntax."
   (let ((result (make-string-output-stream))
         (len (length line))

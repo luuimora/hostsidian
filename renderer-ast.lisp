@@ -1,5 +1,5 @@
 ;;
-;; Websidian. Converts .md to .html
+;; Hostsidian. Converts .md to .html
 ;; Copyright (C) 2026  Artyom Gorlov
 ;;
 ;; This program is free software: you can redistribute it and/or modify
@@ -15,7 +15,7 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
-(in-package :websidian)
+(in-package :hostsidian)
 (defun render-ast-to-html (node)
   (cond
    ((null node) (format *error-output* "Got a NIL error. Report to Issues on Github, please") "")

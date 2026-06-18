@@ -1,5 +1,5 @@
 ;;
-;; Websidian. Converts .md to .html
+;; Hostsidian. Converts .md to .html
 ;; Copyright (C) 2026  Artyom Gorlov
 ;;
 ;; This program is free software: you can redistribute it and/or modify
@@ -15,7 +15,7 @@
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
-(asdf:defsystem #:websidian
+(asdf:defsystem #:hostsidian
   :description "Converts a given file into HTML. Can embedd an CSS into file."
   :author "Artyom Gorlov"
   :license "GPL 3.0"
@@ -33,6 +33,6 @@
 
   :build-operation "deploy-console-op"
 
-  :build-pathname "websidian"
+  :build-pathname "hostsidian"
 
-  :entry-point "websidian:main")
+  :entry-point "hostsidian:main")

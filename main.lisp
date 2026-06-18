@@ -1,5 +1,5 @@
 ;;
-;; Websidian. Converts .md to .html
+;; Hostsidian. Converts .md to .html
 ;; Copyright (C) 2026  Artyom Gorlov
 ;;
 ;; This program is free software: you can redistribute it and/or modify
@@ -16,7 +16,7 @@
 ;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 ;;
 
-(in-package :websidian)
+(in-package :hostsidian)
 (defun main ()
   (let ((args (uiop:command-line-arguments)))
     
