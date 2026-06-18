@@ -45,6 +45,8 @@ Script will work as intendent if you put all your files into one directory (also
 
 If you somehow found this helpful, enjoy.
 
+***
+
 **Project structure**:
 
 1. _predicates.lisp_ contains predicates used in project
